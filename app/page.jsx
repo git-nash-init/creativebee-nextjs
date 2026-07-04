@@ -12,10 +12,12 @@ import Faq from "@/components/Faq";
 import FinalCta from "@/components/FinalCta";
 import FirstStep from "@/components/FirstStep";
 import Footer from "@/components/Footer";
+import Bees from "@/components/Bees";
 
 export default function Home() {
   return (
     <>
+      <Bees />
       <Navbar />
       <Hero />
       <Marquee />

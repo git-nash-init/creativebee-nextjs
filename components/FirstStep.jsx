@@ -78,6 +78,7 @@ export default function FirstStep() {
                   ))}
                 </div>
               </div>
+              <img src="/iphone-frame.png" alt="" className="phone-frame" aria-hidden="true" />
             </motion.div>
           </div>
         </div>

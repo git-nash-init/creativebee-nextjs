@@ -120,11 +120,11 @@ export default function Hero() {
             <div className="hero-glow" />
             <div className="phone-wrap" ref={phoneWrapRef}>
               <div className="phone">
-                <div className="phone-notch" />
                 <div className="phone-screen">
+                  <div className="pp-canvas">
                   <div className="pp-head" />
-                  <div className="pp-av">AR</div>
-                  <h4 className="pp-name">Aarav Rathi</h4>
+                  <div className="pp-av">CB</div>
+                  <h4 className="pp-name">CreativeBee</h4>
                   <p className="pp-tag">Full Stack Developer · Educator</p>
                   <div className="pp-stats">
                     <span><b>12.4K</b>Students</span>
@@ -146,7 +146,9 @@ export default function Hero() {
                     <span><h5>UI Kit + Templates</h5><p>Instant download</p></span>
                     <span className="pr">₹799</span>
                   </div>
+                  </div>
                 </div>
+                <img src="/iphone-frame.png" alt="" className="phone-frame" aria-hidden="true" />
               </div>
             </div>
             <div className="float-card fc1">
