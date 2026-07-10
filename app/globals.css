@@ -491,11 +491,12 @@ footer{background:#F7F4FF;padding:70px 0 34px;border-top:1px solid var(--line)}
   background:linear-gradient(90deg,#7C3AED,#E935C1 45%,#FFB400);background-size:220% auto;
   background-position:35% 0;
   -webkit-background-clip:text;background-clip:text;color:transparent}
-.gw-l{left:50%;transform:translate(calc(-50% - 21vw - var(--pw)*34vw),-50%);opacity:calc(1 - var(--pw)*1.25)}
+.gw-l{left:50%;transform:translate(calc(-50% - 24.8vw - var(--pw)*40vw),-50%);opacity:calc(1 - var(--pw)*1.25)}
 /* "earn" is shorter than "create", so the same offset leaves a bigger visual
-   gap to the phone since both are centered on the same point — pull it in
-   so its near edge sits the same distance from the phone as "create"'s */
-.gw-r{left:50%;transform:translate(calc(-50% + 16.5vw + var(--pw)*27vw),-50%);opacity:calc(1 - var(--pw)*1.25)}
+   gap to the phone since both are centered on the same point — its offset
+   is tuned lower so its near edge sits the same distance from the phone as
+   "create"'s (both words fully clear of the phone at rest, not tucked under it) */
+.gw-r{left:50%;transform:translate(calc(-50% + 20.3vw + var(--pw)*33vw),-50%);opacity:calc(1 - var(--pw)*1.25)}
 @keyframes gshift{to{background-position:100% 0}}
 
 /* content chapters driven by scroll progress */
