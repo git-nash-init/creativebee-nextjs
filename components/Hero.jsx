@@ -4,7 +4,15 @@ import {
   motion, AnimatePresence, useScroll, useTransform, useSpring,
 } from "framer-motion";
 
-const WORDS = ["Courses", "Products", "Services", "Webinars", "Mentorship", "Community"];
+const WORDS = ["Courses", "Products", "Services", "Webinars", "Software", "API", "Mentorship", "Community"];
+
+// longer words would otherwise wrap "Sell your {word}" onto its own line —
+// scale them down just enough to keep the whole phrase on one line
+function scaleFor(word) {
+  if (word.length >= 10) return 0.76;
+  if (word.length === 9) return 0.8;
+  return 1;
+}
 
 function RotatingWord() {
   const [i, setI] = useState(0);
@@ -13,7 +21,7 @@ function RotatingWord() {
     return () => clearInterval(t);
   }, []);
   return (
-    <span className="rot-wrap">
+    <span className="rot-wrap" style={{ "--rot-scale": scaleFor(WORDS[i]) }}>
       <AnimatePresence mode="wait">
         <motion.span
           key={WORDS[i]}
