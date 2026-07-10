@@ -78,8 +78,16 @@ nav.scrolled{background:rgba(255,255,255,.85);backdrop-filter:blur(18px);-webkit
 .hero::before{content:"";position:absolute;inset:0;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg width='56' height='100' viewBox='0 0 56 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M28 0L56 16v33L28 66 0 49V16L28 0zm0 66l28 17v17L28 84 0 100V83l28-17z' fill='none' stroke='%23FFB400' stroke-width='1'/%3E%3C/svg%3E");background-size:56px 100px}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;position:relative;z-index:2}
 .hero h1{font-size:clamp(40px,5.6vw,68px);font-weight:800;line-height:1.04;letter-spacing:-.03em;color:var(--ink)}
+/* longer words (Mentorship, Community) shrink to keep "Sell your {word}" on
+   one line — the scale lives on this persistent wrap (not on the rotating
+   motion.span itself: framer-motion's client-side style reconciliation
+   doesn't forward arbitrary static style/data keys placed directly on a
+   motion component, which either drops the value or throws an SSR/client
+   hydration mismatch). Hero.jsx defers updating --rot-scale until the
+   outgoing word's exit animation fully completes, so the wrap never
+   resizes while the old (still-fading) word is still occupying it. */
 .hero h1 .rot-wrap{display:inline-block;position:relative;color:var(--honey-deep);min-width:5.2ch;text-align:left;vertical-align:baseline;
-  font-size:calc(1em * var(--rot-scale,1));transition:font-size .25s ease}
+  font-size:calc(1em * var(--rot-scale,1))}
 .hero h1 .rot{display:inline-block;position:relative}
 .hero h1 .rot.out{animation:wordOut .4s forwards}
 .hero h1 .rot.inw{animation:wordIn .5s forwards}

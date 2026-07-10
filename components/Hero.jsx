@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   motion, AnimatePresence, useScroll, useTransform, useSpring,
 } from "framer-motion";
@@ -16,13 +16,18 @@ function scaleFor(word) {
 
 function RotatingWord() {
   const [i, setI] = useState(0);
+  // rot-wrap's scale only updates once the outgoing word has fully exited
+  // (via onExitComplete below) — updating it in sync with `i` instead would
+  // resize the wrap while the old word is still mid fade-out, since it's a
+  // persistent element the old word's font-size inherits from live
+  const [displayI, setDisplayI] = useState(0);
   useEffect(() => {
     const t = setInterval(() => setI((v) => (v + 1) % WORDS.length), 2600);
     return () => clearInterval(t);
   }, []);
   return (
-    <span className="rot-wrap" style={{ "--rot-scale": scaleFor(WORDS[i]) }}>
-      <AnimatePresence mode="wait">
+    <span className="rot-wrap" style={{ "--rot-scale": scaleFor(WORDS[displayI]) }}>
+      <AnimatePresence mode="wait" onExitComplete={() => setDisplayI(i)}>
         <motion.span
           key={WORDS[i]}
           className="rot"
@@ -53,7 +58,10 @@ export default function Hero() {
   const pc = useSpring(useTransform(scrollYProgress, [0.34, 0.74], [0, 1]), spr);
   const pf = useSpring(useTransform(scrollYProgress, [0.72, 0.98], [0, 1]), spr);
 
-  useEffect(() => {
+  // useLayoutEffect (not useEffect) — runs before the browser paints, so the
+  // phone renders at its correct offset immediately instead of snapping from
+  // dx=0 to the real value on the frame after mount (a visible slide-in)
+  useLayoutEffect(() => {
     const check = () =>
       setIsStatic(
         matchMedia("(max-width:820px)").matches ||
